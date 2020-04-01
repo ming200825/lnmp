@@ -1,0 +1,33 @@
+version: '3'
+services:
+  # mysql:
+    # image: "mysql:latest"
+    # ports:
+     # - "3306:3306"
+    # restart: always
+    # container_name: mysql
+    # environment:
+       # MYSQL_ROOT_PASSWORD: 123456
+    # volumes:
+     # - /docker/mysql/data:/var/lib/mysql
+     # - /docker/mysql/conf:/etc/mysql/conf.d
+  sampleapp:
+    image: sampleapp:v1
+    build: .
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production 
+      - ASPNETCORE_HOSTINGSTARTUPASSEMBLIES=SkyAPM.Agent.AspNetCore
+      - SKYWALKING__SERVICENAME=sample_app
+    restart: always
+    container_name: sampleapp
+    external_links:
+      - oap  #外部容器连接
+    ports:
+      - "5000:80"
+    # depends_on:
+     # - mysql
+    networks:
+      - docker-skywalking61_default
+networks:
+  docker-skywalking61_default:
+    external: true
