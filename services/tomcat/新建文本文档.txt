@@ -1,0 +1,14 @@
+ spring_boot 打包成 jar 自带 tomcat  可以直接在 java虚拟机内运行
+ spring_boot 打包成 war 不带tomact 需要 tomact
+
+
+ tomcat:
+    image: hopher/tomcat:8-jre8
+    container_name: my_tomcat
+    build:
+      context: .
+      dockerfile: ./services/tomcat/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - app:/app:rw
