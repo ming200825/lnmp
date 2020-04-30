@@ -1,1 +1,4 @@
-* text=auto
+*.js linguist-language=Shell
+*.css linguist-language=Shell
+*.html linguist-language=Shell
+*.cs linguist-language=Shell
